@@ -13,7 +13,8 @@ def domain_lookup(dom):
         
     else:
             return f"Enter a proper domain"
-        
+
+
 domain_input = input("Enter a domain you wish to verify: ")
 result = domain_lookup(domain_input)
 print(result)
