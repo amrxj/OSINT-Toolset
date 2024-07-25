@@ -11,7 +11,7 @@ def domain_lookup(dom):
         except:
             return f"{dom} isn't registered or legit"
         
-        else:
+    else:
             return f"Enter a proper domain"
         
 domain_input = domain_lookup(input("Enter a domain you wish to verify: "))
