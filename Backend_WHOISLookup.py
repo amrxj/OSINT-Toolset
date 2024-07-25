@@ -1,3 +1,15 @@
 import whois
+import validators
 
-domain_info = whois.whois(input("What do you want to look up? "))
+def domain_lookup(dom):
+    if validators.domain(dom):
+
+        try:
+            dom_info = whois.whois(dom)
+            return dom_info
+        
+        except:
+            return f"{dom} isn't registered or legit"
+        
+        else:
+            return f"Enter a proper domain"
