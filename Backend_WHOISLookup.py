@@ -14,6 +14,6 @@ def domain_lookup(dom):
     else:
             return f"Enter a proper domain"
         
-domain_input = domain_lookup(input("Enter a domain you wish to verify: "))
-
-print(domain_input)
+domain_input = input("Enter a domain you wish to verify: ")
+result = domain_lookup(domain_input)
+print(result)
