@@ -16,7 +16,7 @@ def conversion_decimal(dms, reference):
     return decimal
 
 # Gathering EXIF information from images.
-with Image.open("/Users/Amraj/Desktop/IMG_6152.jpg") as img:
+with Image.open("IMG Pathway Here") as img:
     exif_data = img._getexif()
     gps_data = {}
 
