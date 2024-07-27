@@ -5,6 +5,13 @@ from PIL.ExifTags import TAGS, GPSTAGS
 
 #decimal format conversion
 
+
+#Explanation of decimal conversion: 
+#converts degrees minutes seconds into decimal degree
+#dms is a tuple containing all three, each are expected to be
+#an IFDRational object from exif data. 
+#reference indicates direction (it's a string)
+#EXTRA: An IFDRational object in the context of image metadata represents a rational number, specifically used to store precise values such as GPS coordinates. It consists of a numerator and a denominator, allowing for accurate representation of fractional values in the image's EXIF data.
 def conversion_decimal(dms, reference):
     degrees = dms[0].numerator / dms[0].denominator
     minutes = dms[1].numerator / dms[1].denominator
