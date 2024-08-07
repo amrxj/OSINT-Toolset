@@ -22,6 +22,7 @@ def conversion_decimal(dms, reference):
     return decimal
 
 
+
 # Gathering EXIF information from images.
 def exifgathering(filename):
     try:
@@ -48,10 +49,15 @@ def exifgathering(filename):
                 lat = conversion_decimal(gps_data['GPSLatitude'], gps_data['GPSLatitudeRef'])
                 long = conversion_decimal(gps_data['GPSLongitude'], gps_data['GPSLongitudeRef'])
                 print(f"Latitude: {lat}, Longitude: {long}")
+                print(f"https://maps.google.com/?q={lat},{long}")
             else:
                     print("No GPS data available.")
     except Exception as e:
         print(f"error has occured: {e}")
+
+
+
+
 
 if __name__ == "__main__":
     filename = input("Enter Path To IMG File: ")
