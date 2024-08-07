@@ -2,6 +2,8 @@ import os
 import sys
 from PIL import Image
 from PIL.ExifTags import TAGS, GPSTAGS
+from tkinter import *
+from tkinter import Tk, Button, filedialog
 
 #decimal format conversion
 
@@ -22,27 +24,44 @@ def conversion_decimal(dms, reference):
         decimal = -decimal
     return decimal
 
-# Gathering EXIF information from images.
-with Image.open("IMG Pathway Here") as img:
-    exif_data = img._getexif()
-    gps_data = {}
-
-    #if it has exif data
-    if exif_data:
-        #get gps data
+def openFile():
+    filepath = filedialog.askopenfilename()
+    if filepath:
+        process_image(filepath)
     
-        for tag_id in exif_data:
-            #get tags name
-            tag = TAGS.get(tag_id, tag_id)
-            if tag == 'GPSInfo':
-                for key, val in exif_data[tag_id].items():
-                    decoded = GPSTAGS.get(key, key)
-                    gps_data[decoded] = val
+    root.quit() #closes correctly
+ 
 
-    #check if contains latitude and longitude
-    if 'GPSLatitude' in gps_data and 'GPSLongitude' in gps_data:
-        lat = conversion_decimal(gps_data['GPSLatitude'], gps_data['GPSLatitudeRef'])
-        long = conversion_decimal(gps_data['GPSLongitude'], gps_data['GPSLongitudeRef'])
-        print(f"Latitude: {lat}, Longitude: {long}")
-    else:
-            print("No GPS data available.")
+# Gathering EXIF information from images.
+filename = openFile()
+
+def process_image(filename):
+    with Image.open(filename) as img:
+
+        exif_data = img._getexif()
+        gps_data = {}
+
+        #if it has exif data
+        if exif_data:
+            #get gps data
+        
+            for tag_id in exif_data:
+                #get tags name
+                tag = TAGS.get(tag_id, tag_id)
+                if tag == 'GPSInfo':
+                    for key, val in exif_data[tag_id].items():
+                        decoded = GPSTAGS.get(key, key)
+                        gps_data[decoded] = val
+
+        #check if contains latitude and longitude
+        if 'GPSLatitude' in gps_data and 'GPSLongitude' in gps_data:
+            lat = conversion_decimal(gps_data['GPSLatitude'], gps_data['GPSLatitudeRef'])
+            long = conversion_decimal(gps_data['GPSLongitude'], gps_data['GPSLongitudeRef'])
+            print(f"Latitude: {lat}, Longitude: {long}")
+        else:
+                print("No GPS data available.")
+
+if __name__ == "__main__":
+    root = Tk()
+    Button(root, text="Open Image", command=lambda: openFile(root)).pack()
+    root.mainloop()
