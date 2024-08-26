@@ -49,16 +49,40 @@ def exifgathering(filename):
                 lat = conversion_decimal(gps_data['GPSLatitude'], gps_data['GPSLatitudeRef'])
                 long = conversion_decimal(gps_data['GPSLongitude'], gps_data['GPSLongitudeRef'])
                 print(f"Latitude: {lat}, Longitude: {long}")
-                print(f"https://maps.google.com/?q={lat},{long}")
+                print(f"Google Maps: https://maps.google.com/?q={lat},{long}")
+                print(f"{exif_data}")
             else:
                     print("No GPS data available.")
     except Exception as e:
         print(f"error has occured: {e}")
 
+def multi_search(directory):
+    supported_ext = ('.jpg', '.tiff')
+    for root, dirs, files in os.walk(directory):
+        for file in files:
+            if file.lower().endswith(supported_ext):
+                exifgathering(os.path.join(root, file))
 
-
+def info_data(filepath):
+            
+        with Image.open(filename) as img:
+            exif_data = img._getexif()
+            if exif_data:
+                print("EXIF Data Located!")
+                exif = {TAGS.get(k, k): v for k, v in exif_data.items()}
+                print(exif)
 
 
 if __name__ == "__main__":
-    filename = input("Enter Path To IMG File: ")
-    exifgathering(filename)
+    mode = input(f"Enter 'single' to process a single image, 'multi' to process all images in a directory, and 'info' to view all metadata: ").lower()
+    if mode == 'single':
+        filename = input("Enter the path to the image file: ")
+        exifgathering(filename)
+    elif mode == 'multi':
+        directory = input("Enter the path to the directory: ")
+        multi_search(directory)
+    elif mode == 'info':
+        filename = input("Enter the path to the image file: ")
+        info_data(filename)
+    else:
+        print("Invalid input. Please start the program again and choose a valid option.")
