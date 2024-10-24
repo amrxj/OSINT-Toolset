@@ -93,5 +93,6 @@ if __name__ == "__main__":
     elif mode == 'multi':
         directory = input("Enter the path to the directory: ")
         multi_search(directory)
+        info_data(directory)
     else:
         print("Invalid input. Please start the program again and choose a valid option.")
