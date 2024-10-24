@@ -1,3 +1,5 @@
-just a simple exif data extractor built using python!
---> currently a CLI program, where you designate your file path and it'll find the coords of the image!
---> plans: upgrade into a full program, add features such as: exif removal / skewing, encryption, and more if any pop up along the way! 
+slowly developing what was once a tool for geolocation via EXIF information from images, to a full-fledged OSINT tool to understand and implement various tools & methods. 
+goals so far: 
+- fix this geolocation (it shat itself)
+- add more tools (but not simply tossing them in you know, understand how they work, code 'em, and then implement.)
+- maybe have a cleaner CLI experience.
