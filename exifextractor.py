@@ -33,7 +33,7 @@ def exifgathering(filename):
 
             #if it has exif data
             if exif_data:
-                print("EXIF data located")
+                print("\nEXIF data located!")
                 #get gps data
             
                 for tag_id in exif_data:
@@ -50,7 +50,6 @@ def exifgathering(filename):
                 long = conversion_decimal(gps_data['GPSLongitude'], gps_data['GPSLongitudeRef'])
                 print(f"Latitude: {lat}, Longitude: {long}")
                 print(f"Google Maps: https://maps.google.com/?q={lat},{long}")
-                print(f"{exif_data}")
             else:
                     print("No GPS data available.")
     except Exception as e:
@@ -70,19 +69,29 @@ def info_data(filepath):
             if exif_data:
                 print("EXIF Data Located!")
                 exif = {TAGS.get(k, k): v for k, v in exif_data.items()}
-                print(exif)
+                
+                camera_make = exif.get('Make', 'N/A')
+                camera_model = exif.get('Model', 'N/A')
+                software = exif.get('Software', 'N/A')
+                date_time = exif.get('DateTime', 'N/A')
+
+                print(f"Make: {camera_make}")
+                print(f"Model: {camera_model}")
+                print(f"OS: {software}")
+                print(f"Date & Time: {date_time}")
+                print(f"\n")
+                
+            
 
 
 if __name__ == "__main__":
-    mode = input(f"Enter 'single' to process a single image, 'multi' to process all images in a directory, and 'info' to view all metadata: ").lower()
+    mode = input(f"Enter 'single' to process a single image, 'multi' to process all images in a directory: ").lower()
     if mode == 'single':
         filename = input("Enter the path to the image file: ")
         exifgathering(filename)
+        info_data(filename)
     elif mode == 'multi':
         directory = input("Enter the path to the directory: ")
         multi_search(directory)
-    elif mode == 'info':
-        filename = input("Enter the path to the image file: ")
-        info_data(filename)
     else:
         print("Invalid input. Please start the program again and choose a valid option.")

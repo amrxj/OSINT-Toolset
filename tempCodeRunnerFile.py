@@ -1,4 +1,8 @@
-
-
-if __name__ == "__main__":
-    mode = input("Enter 'single' to process a single image or 'multi' to process
+def info_data(filepath):
+            
+        with Image.open(filename) as img:
+            exif_data = img._getexif()
+            if exif_data:
+                print("EXIF Data Located!")
+                exif = {TAGS.get(k, k): v for k, v in exif_data.items()}
+                print(exif)
