@@ -2,9 +2,26 @@ import os
 from PIL import Image, ExifTags
 from PIL.ExifTags import TAGS, GPSTAGS
 
+def banner(): 
+    font = """
+
+
+▄███▄      ▄  ▄█ ▄████      ▄███▄      ▄     ▄▄▄▄▀ █▄▄▄▄ ██   ▄█▄      ▄▄▄▄▀ ████▄ █▄▄▄▄ 
+█▀   ▀ ▀▄   █ ██ █▀   ▀     █▀   ▀ ▀▄   █ ▀▀▀ █    █  ▄▀ █ █  █▀ ▀▄ ▀▀▀ █    █   █ █  ▄▀ 
+██▄▄     █ ▀  ██ █▀▀        ██▄▄     █ ▀      █    █▀▀▌  █▄▄█ █   ▀     █    █   █ █▀▀▌  
+█▄   ▄▀ ▄ █   ▐█ █          █▄   ▄▀ ▄ █      █     █  █  █  █ █▄  ▄▀   █     ▀████ █  █  
+▀███▀  █   ▀▄  ▐  █         ▀███▀  █   ▀▄   ▀        █      █ ▀███▀   ▀              █   
+        ▀          ▀                ▀               ▀      █                        ▀    
+                                                          ▀                              
+                                                          
+                                                          
+                                                           """ 
+    print(font)
+
+if __name__ == "__main__":
+    banner()
+
 #decimal format conversion
-
-
 #Explanation of decimal conversion: 
 #converts degrees minutes seconds into decimal degree
 #dms is a tuple containing all three, each are expected to be
