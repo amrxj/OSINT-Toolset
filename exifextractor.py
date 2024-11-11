@@ -4,35 +4,6 @@ from PIL.ExifTags import TAGS, GPSTAGS
 from flask import Flask, render_template, request, redirect, url_for
 
 
-app = Flask(__name__)
-
-@app.route('/')
-def upload_form():
-    return render_template('upload.html')
-
-@app.route('/upload', methods=['POST'])
-def upload_file():
-    if 'file' not in request.files:
-        return 'No file part'
-
-        file = request.files['file']
-        if file.filename == '':
-            return 'No selected file'
-
-        if file:
-            file_path = os.path.join("uploads", file.filename)
-            file.save(file_path)
-
-            # process file as per exif data extraction logic
-
-            exifgathering(file_path)
-            info_data(file_path)
-
-            return redirect(url_for('upload_form'))
-
-if __name__ == "__main__":
-    app.run(debug=True)
-
 
 
 def banner(): 
