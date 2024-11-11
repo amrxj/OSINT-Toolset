@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <title>Image EXIF Data Extractor</title>
     <style>
-        /* Style for drag and drop area */
         #drop-zone {
             width: 300px;
             height: 200px;
@@ -28,8 +27,27 @@
         <button type="submit">Upload</button>
     </form>
 
+    {% if exif_results %}
+        <h3>EXIF Data Results:</h3>
+        {% if exif_results.error %}
+            <p>Error: {{ exif_results.error }}</p>
+        {% elif exif_results.exif_found %}
+            <ul>
+                {% if exif_results.latitude and exif_results.longitude %}
+                    <li>Latitude: {{ exif_results.latitude }}</li>
+                    <li>Longitude: {{ exif_results.longitude }}</li>
+                    <li><a href="{{ exif_results.google_maps_link }}" target="_blank">View on Google Maps</a></li>
+                {% endif %}
+                {% if exif_results.gps_data %}
+                    <li>{{ exif_results.gps_data }}</li>
+                {% endif %}
+            </ul>
+        {% else %}
+            <p>No EXIF data found.</p>
+        {% endif %}
+    {% endif %}
+
     <script>
-        // Drag and drop file handling
         const dropZone = document.getElementById('drop-zone');
         const fileInput = document.getElementById('file-input');
 
