@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Image EXIF Data Extractor</title>
+    <style>
+        /* Style for drag and drop area */
+        #drop-zone {
+            width: 300px;
+            height: 200px;
+            border: 2px dashed #cccccc;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: auto;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h2>Upload an Image</h2>
+    <form id="upload-form" action="/upload" method="POST" enctype="multipart/form-data">
+        <input type="file" id="file-input" name="file" style="display: none;">
+        <div id="drop-zone" onclick="document.getElementById('file-input').click();">
+            Drag & Drop or Click to Select File
+        </div>
+        <br>
+        <button type="submit">Upload</button>
+    </form>
+
+    <script>
+        // Drag and drop file handling
+        const dropZone = document.getElementById('drop-zone');
+        const fileInput = document.getElementById('file-input');
+
+        dropZone.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            dropZone.style.borderColor = 'blue';
+        });
+
+        dropZone.addEventListener('dragleave', () => {
+            dropZone.style.borderColor = '#cccccc';
+        });
+
+        dropZone.addEventListener('drop', (e) => {
+            e.preventDefault();
+            fileInput.files = e.dataTransfer.files;
+        });
+    </script>
+</body>
+</html>
