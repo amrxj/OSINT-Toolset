@@ -3,6 +3,26 @@ from PIL import Image, ExifTags
 from PIL.ExifTags import TAGS, GPSTAGS
 import tkinter as tk
 from tkinter import filedialog
+import whois
+import validators
+
+
+
+
+def domain_lookup(dom):
+    if validators.domain(dom):
+
+        try:
+            dom_info = whois.whois(dom)
+            return dom_info
+        
+        except:
+            return f"{dom} isn't registered or legit"
+        
+    else:
+            return f"Enter a proper domain"
+
+
 
 def select_file():
     root = tk.Tk()
@@ -15,26 +35,6 @@ def select_folder():
     root.withdraw
     folder_path = filedialog.askdirectory(title="Select a folder")
     return folder_path
-
-
-def banner(): 
-    font = """
-
-
-▄███▄      ▄  ▄█ ▄████      ▄███▄      ▄     ▄▄▄▄▀ █▄▄▄▄ ██   ▄█▄      ▄▄▄▄▀ ████▄ █▄▄▄▄ 
-█▀   ▀ ▀▄   █ ██ █▀   ▀     █▀   ▀ ▀▄   █ ▀▀▀ █    █  ▄▀ █ █  █▀ ▀▄ ▀▀▀ █    █   █ █  ▄▀ 
-██▄▄     █ ▀  ██ █▀▀        ██▄▄     █ ▀      █    █▀▀▌  █▄▄█ █   ▀     █    █   █ █▀▀▌  
-█▄   ▄▀ ▄ █   ▐█ █          █▄   ▄▀ ▄ █      █     █  █  █  █ █▄  ▄▀   █     ▀████ █  █  
-▀███▀  █   ▀▄  ▐  █         ▀███▀  █   ▀▄   ▀        █      █ ▀███▀   ▀              █   
-        ▀          ▀                ▀               ▀      █                        ▀    
-                                                          ▀                              
-                                                          
-                                                          
-                                                           """ 
-    print(font)
-
-if __name__ == "__main__":
-    banner()
 
 #decimal format conversion
 #Explanation of decimal conversion: 
@@ -113,11 +113,28 @@ def info_data(filepath):
                 print(f"Date & Time: {date_time}")
                 print(f"\n")
                 
-            
+def banner(): 
+    font = """
+
+
+▄███▄      ▄  ▄█ ▄████      ▄███▄      ▄     ▄▄▄▄▀ █▄▄▄▄ ██   ▄█▄      ▄▄▄▄▀ ████▄ █▄▄▄▄ 
+█▀   ▀ ▀▄   █ ██ █▀   ▀     █▀   ▀ ▀▄   █ ▀▀▀ █    █  ▄▀ █ █  █▀ ▀▄ ▀▀▀ █    █   █ █  ▄▀ 
+██▄▄     █ ▀  ██ █▀▀        ██▄▄     █ ▀      █    █▀▀▌  █▄▄█ █   ▀     █    █   █ █▀▀▌  
+█▄   ▄▀ ▄ █   ▐█ █          █▄   ▄▀ ▄ █      █     █  █  █  █ █▄  ▄▀   █     ▀████ █  █  
+▀███▀  █   ▀▄  ▐  █         ▀███▀  █   ▀▄   ▀        █      █ ▀███▀   ▀              █   
+        ▀          ▀                ▀               ▀      █                        ▀    
+                                                          ▀                              
+                                                          
+                                                          
+                                                           """ 
+    print(font)
+
+if __name__ == "__main__":
+    banner()            
 
 
 if __name__ == "__main__":
-    mode = input(f"Enter 'single' to process a single image, 'multi' to process all images in a directory: ").lower()
+    mode = input(f"Enter 'single' to process a single image, 'multi' to process all images in a directory, and whois for domain lookup: ").lower()
     if mode == 'single':
        filename = select_file()
        if filename:
@@ -130,5 +147,11 @@ if __name__ == "__main__":
         if directory:
             multi_search(directory)
             info_data(directory)
+
+    elif mode == 'whois':
+        domain_input = input("Enter a domain you wish to verify: ")
+        result = domain_lookup(domain_input)
+        print(result)
+    
     else:
         print("Invalid input. Please start the program again and choose a valid option.")
