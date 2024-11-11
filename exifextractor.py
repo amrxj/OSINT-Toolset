@@ -1,9 +1,20 @@
 import os
 from PIL import Image, ExifTags
 from PIL.ExifTags import TAGS, GPSTAGS
-from flask import Flask, render_template, request, redirect, url_for
+import tkinter as tk
+from tkinter import filedialog
 
+def select_file():
+    root = tk.Tk()
+    root.withdraw
+    file_path = filedialog.askopenfilename(title = "Select a File")
+    return file_path
 
+def select_folder():
+    root = tk.Tk()
+    root.withdraw
+    folder_path = filedialog.askdirectory(title="Select a folder")
+    return folder_path
 
 
 def banner(): 
@@ -108,12 +119,16 @@ def info_data(filepath):
 if __name__ == "__main__":
     mode = input(f"Enter 'single' to process a single image, 'multi' to process all images in a directory: ").lower()
     if mode == 'single':
-        filename = input("Enter the path to the image file: ")
+       filename = select_file()
+       if filename:
         exifgathering(filename)
         info_data(filename)
+ 
+        
     elif mode == 'multi':
-        directory = input("Enter the path to the directory: ")
-        multi_search(directory)
-        info_data(directory)
+        directory = select_folder()
+        if directory:
+            multi_search(directory)
+            info_data(directory)
     else:
         print("Invalid input. Please start the program again and choose a valid option.")
