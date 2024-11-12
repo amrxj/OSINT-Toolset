@@ -1,5 +1,11 @@
-slowly developing what was once a tool for geolocation via EXIF information from images, to a full-fledged OSINT tool to understand and implement various tools & methods. 
-goals so far: 
-- fix this geolocation (it shat itself)
-- add more tools (but not simply tossing them in you know, understand how they work, code 'em, and then implement.)
-- maybe have a cleaner CLI experience.
+This program extracts and displays EXIF metadata from image files, providing file information in a readable format. Designed for OSINT usage, and developed out of curiosity.
+
+(ONLY RAW PHOTOS WORKS!)
+
+Features
+Extracts comprehensive EXIF data from various image formats.
+Displays metadata in an organized, readable format.
+Highlights geolocation data (if available). 
+Supports batch processing for analyzing multiple files simultaneously.
+
+
