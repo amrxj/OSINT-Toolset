@@ -23,7 +23,6 @@ def domain_lookup(dom):
             return f"Enter a proper domain"
 
 
-
 def select_file():
     root = tk.Tk()
     root.withdraw()
