@@ -26,13 +26,13 @@ def domain_lookup(dom):
 
 def select_file():
     root = tk.Tk()
-    root.withdraw
+    root.withdraw()
     file_path = filedialog.askopenfilename(title = "Select a File")
     return file_path
 
 def select_folder():
     root = tk.Tk()
-    root.withdraw
+    root.withdraw()
     folder_path = filedialog.askdirectory(title="Select a folder")
     return folder_path
 
@@ -83,9 +83,10 @@ def exifgathering(filename):
                 print(f"Latitude: {lat}, Longitude: {long}")
                 print(f"Google Maps: https://maps.google.com/?q={lat},{long}")
             else:
-                    print("No GPS data available.")
+                print("No GPS data available.")
+            
     except Exception as e:
-        print(f"error has occured: {e}")
+                    print(f"error has occured: {e}")
 
 def multi_search(directory):
     supported_ext = ('.jpg', '.tiff')
@@ -96,7 +97,7 @@ def multi_search(directory):
 
 def info_data(filepath):
             
-        with Image.open(filename) as img:
+        with Image.open(filepath) as img:
             exif_data = img._getexif()
             if exif_data:
                 print("EXIF Data Located!")
@@ -152,6 +153,8 @@ if __name__ == "__main__":
         domain_input = input("Enter a domain you wish to verify: ")
         result = domain_lookup(domain_input)
         print(result)
+    
+    elif mode == 
     
     else:
         print("Invalid input. Please start the program again and choose a valid option.")
